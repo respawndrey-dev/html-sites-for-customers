@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follow-Up Generator</title>
+
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; background:#f5f7fa; }
+  .wrap { max-width: 900px; margin: 40px auto; background:white; padding:24px; border-radius:8px; }
+  h1 { margin-bottom: 16px; }
+  input, textarea { width:100%; margin-bottom:12px; padding:10px; border:1px solid #ccc; border-radius:6px; }
+  button { padding:12px 16px; background:#1B3139; color:white; border:none; border-radius:6px; cursor:pointer; }
+  iframe { width:100%; height:500px; border:1px solid #ddd; margin-top:20px; }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <h1>Client Follow-Up Generator</h1>
+
+  <input id="client" placeholder="Client Name">
+  <input id="date" placeholder="Date">
+  <textarea id="summary" placeholder="Executive Summary"></textarea>
+  <textarea id="insights" placeholder="Key Insights (one per line)"></textarea>
+  <textarea id="next" placeholder="Next Steps (one per line)"></textarea>
+
+  <button onclick="generate()">Generate Page</button>
+
+  <iframe id="preview"></iframe>
+</div>
+
+<script>
+function generate() {
+  const client = document.getElementById('client').value;
+  const date = document.getElementById('date').value;
+  const summary = document.getElementById('summary').value;
+  const insights = document.getElementById('insights').value.split('\n').map(i => `<li>${i}</li>`).join('');
+  const next = document.getElementById('next').value.split('\n').map(i => `<li>${i}</li>`).join('');
+
+  const html = `
+  <html>
+  <head>
+  <style>
+    body { font-family: Arial; padding:20px; }
+    h1 { color:#1B3139; }
+    .card { border:1px solid #ddd; padding:16px; border-radius:6px; margin-bottom:20px; }
+  </style>
+  </head>
+  <body>
+    <h1>${client} Follow-Up</h1>
+    <p>${date}</p>
+
+    <div class="card">
+      <h2>Executive Summary</h2>
+      <p>${sum}
